@@ -1,3 +1,24 @@
 @import "variables.scss";
 @import "~bootstrap/scss/bootstrap";
 
+@font-face {
+    font-family: "Maven Pro";
+    src: url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
+}
+
+:root{
+    background-color: $light;
+    font-family: $text-font;
+}
+
+.navbar {
+    font-family: $title-font;
+    font-size: 18px;
+    font-weight: 400;
+    background: $light;
+    background: linear-gradient(113deg, $light 50%, $primary 50%, $light 50%);
+}
+
+.w-fit {
+    width: fit-content;
+}
