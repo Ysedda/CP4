@@ -14,9 +14,6 @@ class Trip
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
-
     #[ORM\Column]
     private ?float $startLatitude = null;
 
@@ -26,21 +23,15 @@ class Trip
     #[ORM\Column]
     private ?int $spots = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $meetingPoint = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
     }
 
     public function getStartLatitude(): ?float
@@ -75,6 +66,30 @@ class Trip
     public function setSpots(int $spots): self
     {
         $this->spots = $spots;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getMeetingPoint(): ?string
+    {
+        return $this->meetingPoint;
+    }
+
+    public function setMeetingPoint(string $meetingPoint): self
+    {
+        $this->meetingPoint = $meetingPoint;
 
         return $this;
     }

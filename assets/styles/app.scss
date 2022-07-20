@@ -23,6 +23,8 @@ h1, h2, h3, h4, h5
     font-weight: 400;
     background: $light;
     background: linear-gradient(113deg, $light 50%, $primary 50%, $light 50%);
+    position: fixed;
+    width: 100%;
 }
 
 .w-fit {
@@ -33,9 +35,7 @@ h1, h2, h3, h4, h5
     background-image: url(/assets/images/banner-ramene.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: calc(100vh - 66px);
-    min-width: 100%;
-    background-position-x: -40px;
+    background-attachment: fixed;
 }
 
 .home-search {
@@ -43,3 +43,8 @@ h1, h2, h3, h4, h5
     height: 20vh;
     background-color: $light;
 } 
+
+.card {
+    opacity:0.95;
+    height:15rem;
+}

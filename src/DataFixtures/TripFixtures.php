@@ -20,12 +20,13 @@ class TripFixtures extends Fixture
         $faker = Factory::create();
         // $product = new Product();
         // $manager->persist($product);
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $trip = new Trip();
-            $trip->setSpots(rand(0, self::MAX_SEATS));
-            $trip->setStartLatitude(rand(self::LATITUDE[0], self::LONGITUDE[1]));
+            $trip->setSpots(rand(1, self::MAX_SEATS));
+            $trip->setStartLatitude(rand(self::LATITUDE[0], self::LATITUDE[1]));
             $trip->setStartLongitude(rand(self::LONGITUDE[0], self::LONGITUDE[1]));
             $trip->setDate($faker->dateTimeBetween('-1 week', '+1 week'));
+            $trip->setMeetingPoint($faker->sentence(3));
 
             $manager->persist($trip);
         }
