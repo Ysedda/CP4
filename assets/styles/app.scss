@@ -11,6 +11,12 @@
     font-family: $text-font;
 }
 
+h1, h2, h3, h4, h5 
+{
+    font-family: $title-font;
+}
+
+
 .navbar {
     font-family: $title-font;
     font-size: 18px;
@@ -22,3 +28,18 @@
 .w-fit {
     width: fit-content;
 }
+
+.home-banner {
+    background-image: url(/assets/images/banner-ramene.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: calc(100vh - 66px);
+    min-width: 100%;
+    background-position-x: -40px;
+}
+
+.home-search {
+    width: 70%;
+    height: 20vh;
+    background-color: $light;
+} 
