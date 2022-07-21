@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trip;
+use App\Entity\User;
 use App\Form\TripType;
 use App\Repository\TripRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +19,14 @@ class TripController extends AbstractController
     {
         return $this->render('trip/index.html.twig', [
             'trips' => $tripRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/mes-trajets', name: 'app_my_trips')]
+    public function myTrips(TripRepository $tripRepository): Response
+    {
+        return $this->render('trip/my_trips.html.twig', [
+            'trips' => $tripRepository->findBy(['driver' => $this->getUser()]),
         ]);
     }
 
@@ -75,4 +84,40 @@ class TripController extends AbstractController
 
         return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/trip/{id}/accepter', name: 'app_trip_accept', methods: ['POST'])]
+    public function acceptReservation(
+        Trip $trip,
+        TripRepository $tripRepository,
+    ): Response {
+        /** @var User */
+        $user = $this->getUser();
+
+        $trip->addPassenger($user);
+        $trip->setSpots($trip->getSpots() - 1);
+        $tripRepository->add($trip, true);
+
+        $this->addFlash('success', 'Bienvenue à bord !');
+
+        return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/trip/{id}/annuler', name: 'app_trip_cancel', methods: ['POST'])]
+    public function cancelReservation(
+        Trip $trip,
+        TripRepository $tripRepository,
+    ): Response {
+        /** @var User */
+        $user = $this->getUser();
+
+        $trip->setDriver(null);
+        $trip->setSpots($trip->getSpots() + 1);
+        $tripRepository->add($trip, true);
+
+        $this->addFlash('warning', 'Vous avez bien décommandé ce trajet !');
+
+        return $this->redirectToRoute('app_my_trips', [], Response::HTTP_SEE_OTHER);
+    }
+
+
 }

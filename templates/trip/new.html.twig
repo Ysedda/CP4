@@ -1,11 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Trip{% endblock %}
+{% block title %}{{ parent() }} | Créer un trajet{% endblock %}
 
 {% block body %}
-    <h1>Create new Trip</h1>
+<section class="home-banner min-vh-100">
+<div class="row">
+<div class="d-flex align-items-center col-md-8 col-12 justify-content-center container">
+<div class="bg-light col-lg-6 col-11 rounded-3 shadow p-4 mt-5">
+    <h1>Nouveau trajet</h1>
 
     {{ include('trip/_form.html.twig') }}
 
     <a href="{{ path('app_trip_index') }}">back to list</a>
+    </div>
+    </div>
+    </div>
+    </section>
 {% endblock %}

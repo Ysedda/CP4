@@ -23,7 +23,7 @@
 				{% if trips is not empty %}
 					<div class="mt-4 w-100 d-flex justify-content-center flex-wrap">
 						{% for trip in trips %}
-							{% if app.user != trip.driver and trip.spots > 0 and app.user not in trip.passengers %}
+						{% if trip.driver == app.user %}
 								<div class="card col-12 col-lg-8 m-2">
 									<div class="row g-0 flex-grow-1">
 										<div class="col-md-6 d-none d-md-block">
@@ -53,16 +53,15 @@
 													<a href="{{ path('app_trip_show', {('id'): trip.id }) }}" class="btn btn-dark {% if app.user is null %} w-100 {% endif %}">
 													<i class="fa-solid pe-2 fa-circle-info"></i>Détails</a>
 													{% if app.user %}
-													{% include 'trip/_accept_trip.html.twig' %}
+													{% include 'trip/_cancel_trip.html.twig' %}
 													{% endif %}
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							{% endif %}
+								{% endif %}
 						{% endfor %}
-
 					</div>
 				{% else %}
 					<h2 class="text-center h4">Pas de trajets !</h2>

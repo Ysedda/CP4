@@ -28,6 +28,7 @@ class UserFixtures extends Fixture
             $user->setFirstname($faker->firstName());
             $user->setLastname($faker->lastName());
             $user->setPassword('user');
+            $user->setIsVerified(true);
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $user,
                 'user'

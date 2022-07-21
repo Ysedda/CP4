@@ -5,10 +5,8 @@
     font-family: "Maven Pro";
     src: url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
 }
-
-:root{
-    background-color: $light;
-    font-family: $text-font;
+* {
+    font-family: $title-font;
 }
 
 h1, h2, h3, h4, h5 
@@ -23,7 +21,7 @@ h1, h2, h3, h4, h5
     font-weight: 400;
     background: $light;
     background: linear-gradient(113deg, $light 50%, $primary 50%, $light 50%);
-    position: fixed;
+    position: sticky;
     width: 100%;
 }
 
@@ -47,5 +45,5 @@ h1, h2, h3, h4, h5
 
 .card {
     opacity:0.95;
-    height:15rem;
+    height:20rem;
 }

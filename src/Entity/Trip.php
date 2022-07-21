@@ -32,7 +32,7 @@ class Trip
     private ?string $meetingPoint = null;
 
     #[ORM\ManyToOne(inversedBy: 'trips')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $driver = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'trips')]
