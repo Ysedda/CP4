@@ -6,6 +6,7 @@ use App\Entity\Trip;
 use App\Entity\User;
 use App\Form\TripType;
 use App\Repository\TripRepository;
+use App\Service\Locator;
 use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,15 +42,19 @@ class TripController extends AbstractController
     }
 
     #[Route('/new', name: 'app_trip_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TripRepository $tripRepository): Response
+    public function new(Request $request, TripRepository $tripRepository, Locator $locator): Response
     {
         $trip = new Trip();
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
+       
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $locator->setCoordinates($trip);
+            $trip->setDriver($this->getUser());
             $tripRepository->add($trip, true);
-
+            
             return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -159,8 +164,7 @@ class TripController extends AbstractController
             $mailer->send($email);
         }
 
-        $trip->setDriver(null);
-        $tripRepository->add($trip, true);
+        $tripRepository->remove($trip, true);
 
         $this->addFlash('warning', 'Vous avez bien décommandé ce trajet !');
 

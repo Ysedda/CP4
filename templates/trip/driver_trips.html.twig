@@ -18,7 +18,9 @@
 					{% endfor %}
 				{% endfor %}
 				<h1 class="text-center mt-4">Je conduis</h1>
-
+				<div class="d-flex justify-content-center">
+				<a href="{{ path('app_trip_new') }}" class="my-5 btn btn-lg btn-success">Créer un trajet</a>
+				</div>
 				{# <a class="btn btn-lg btn-primary my-3" href="{{ path('app_trip_new') }}">Créer un trajet</a> #}
 				{% if trips is not empty %}
 					<div class="mt-4 w-100 d-flex justify-content-center flex-wrap">

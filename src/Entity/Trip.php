@@ -53,7 +53,7 @@ class Trip
         return $this->startLatitude;
     }
 
-    public function setStartLatitude(float $startLatitude): self
+    public function setStartLatitude(?float $startLatitude): self
     {
         $this->startLatitude = $startLatitude;
 
@@ -65,7 +65,7 @@ class Trip
         return $this->startLongitude;
     }
 
-    public function setStartLongitude(float $startLongitude): self
+    public function setStartLongitude(?float $startLongitude): self
     {
         $this->startLongitude = $startLongitude;
 

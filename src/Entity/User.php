@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $address = null;
 
-    #[ORM\OneToMany(mappedBy: 'driver', targetEntity: Trip::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'driver', targetEntity: Trip::class, orphanRemoval: true, cascade:['remove'])]
     private Collection $trips;
 
     #[ORM\Column(type: 'boolean')]
