@@ -45,7 +45,7 @@ for(let i = 0; i < latlngs.length; i++) {
 }
 console.log(coords);
 
-var polyline = L.polyline(coords, {color: 'black'}).addTo(map);
+var polyline = L.polyline(coords, {color: 'blue'}).addTo(map);
 
 map.fitBounds(polyline.getBounds());
 
