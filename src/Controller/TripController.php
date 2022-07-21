@@ -26,7 +26,7 @@ class TripController extends AbstractController
     public function myTrips(TripRepository $tripRepository): Response
     {
         return $this->render('trip/my_trips.html.twig', [
-            'trips' => $tripRepository->findBy(['driver' => $this->getUser()]),
+            'trips' => $tripRepository->findPassengerTrips($this->getUser()),
         ]);
     }
 
@@ -110,7 +110,7 @@ class TripController extends AbstractController
         /** @var User */
         $user = $this->getUser();
 
-        $trip->setDriver(null);
+        $trip->removePassenger($user);
         $trip->setSpots($trip->getSpots() + 1);
         $tripRepository->add($trip, true);
 
