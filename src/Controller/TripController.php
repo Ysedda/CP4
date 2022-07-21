@@ -21,7 +21,7 @@ class TripController extends AbstractController
     public function index(TripRepository $tripRepository): Response
     {
         return $this->render('trip/index.html.twig', [
-            'trips' => $tripRepository->findAll(),
+            'trips' => $tripRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
 
@@ -37,7 +37,7 @@ class TripController extends AbstractController
     public function userDriver(TripRepository $tripRepository): Response
     {
         return $this->render('trip/driver_trips.html.twig', [
-            'trips' => $tripRepository->findBy(['driver' => $this->getUser()]),
+            'trips' => $tripRepository->findBy(['driver' => $this->getUser()], ['id' => 'DESC']),
         ]);
     }
 
@@ -48,14 +48,12 @@ class TripController extends AbstractController
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
        
-        
-
         if ($form->isSubmitted() && $form->isValid()) {
             $locator->setCoordinates($trip);
             $trip->setDriver($this->getUser());
             $tripRepository->add($trip, true);
             
-            return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_driver', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trip/new.html.twig', [

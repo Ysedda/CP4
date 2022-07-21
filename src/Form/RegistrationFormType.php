@@ -28,6 +28,9 @@ class RegistrationFormType extends AbstractType
         ->add('address', TextType::class, [
             'label' => 'Adresse'
         ])
+        ->add('phone', TextType::class, [
+            'label' => 'Téléphone'
+        ])
             ->add('email', EmailType::class, [
                 'label' => 'Courriel'
             ])

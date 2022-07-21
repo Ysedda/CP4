@@ -49,6 +49,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phone = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $addressLatitude = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $addressLongitude = null;
+
     public function __construct()
     {
         $this->trips = new ArrayCollection();
@@ -209,6 +215,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getAddressLatitude(): ?float
+    {
+        return $this->addressLatitude;
+    }
+
+    public function setAddressLatitude(?float $addressLatitude): self
+    {
+        $this->addressLatitude = $addressLatitude;
+
+        return $this;
+    }
+
+    public function getAddressLongitude(): ?float
+    {
+        return $this->addressLongitude;
+    }
+
+    public function setAddressLongitude(?float $addressLongitude): self
+    {
+        $this->addressLongitude = $addressLongitude;
 
         return $this;
     }
