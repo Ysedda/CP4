@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\TripType;
 use App\Repository\TripRepository;
 use App\Service\Locator;
+use App\Service\Route as Path;
 use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +19,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class TripController extends AbstractController
 {
     #[Route('/', name: 'app_trip_index', methods: ['GET'])]
-    public function index(TripRepository $tripRepository): Response
+    public function index(TripRepository $tripRepository, Path $route): Response
     {
+        $trips = $tripRepository->findBy([], ['id' => 'DESC']);
+
         return $this->render('trip/index.html.twig', [
-            'trips' => $tripRepository->findBy([], ['id' => 'DESC']),
+            'trips' => $trips,
         ]);
     }
 
@@ -63,10 +66,13 @@ class TripController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_trip_show', methods: ['GET'])]
-    public function show(Trip $trip): Response
+    public function show(Trip $trip, Path $route): Response
     {
+        $geoJson = json_encode($route->getGeoJson($trip));
+
         return $this->render('trip/show.html.twig', [
             'trip' => $trip,
+            'geoJson' => $geoJson,
         ]);
     }
 

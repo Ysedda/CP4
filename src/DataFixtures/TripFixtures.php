@@ -11,9 +11,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class TripFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const DRIVERS = ['Alain', 'Serge', 'Maxime', 'John', 'Henri'];
     public const LATITUDE = [45, 47];
-    public const LONGITUDE = [0, 2];
+    public const LONGITUDE = [1, 3];
     public const MAX_SEATS = 5;
 
     public function load(ObjectManager $manager): void
