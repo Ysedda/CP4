@@ -11,11 +11,18 @@
         </li>
         
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Mes trajets
+          </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{{ path('app_my_trips') }}">Mes trajets</a>
+          <a class="nav-link" aria-current="page" href="{{ path('app_my_trips') }}">Je conduis</a>
         </li>
-                <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{{ path('app_trip_new') }}">Créer un trajet</a>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{{ path('app_my_trips') }}">On m'amène</a>
+        </li>
+        </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{{ path('app_logout') }}">Se déconnecter</a>

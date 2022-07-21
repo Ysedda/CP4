@@ -32,7 +32,7 @@
 											<iframe width="100%" height="100%" src="https://www.openstreetmap.org/export/embed.html?bbox={{ trip.startLongitude + zoom }}%2C{{ trip.startLatitude + zoom }}%2C{{ trip.startLongitude - zoom }}%2C{{ trip.startLatitude - zoom }}&amp;layer=mapnik&amp;marker={{ trip.startLatitude }}%2C{{ trip.startLongitude }}"></iframe>
 										</div>
 										<div class="col-md-6">
-											<div class="card-body pb-0 d-flex flex-column justify-content-around gap-1 h-100">
+											<div class="card-body py-0 d-flex flex-column justify-content-around gap-1 h-100">
 												<h2 class="card-title h5"><i class="fa-solid fa-location-dot pe-2"></i>{{ trip.meetingPoint }}</h2>
 												<p class="card-text"><i class="fa-solid fa-car pe-2"></i>{{ trip.driver.firstname }}</p>
 												<p class="card-text"><i class="fa-solid fa-calendar-day pe-2"></i>{{ trip.date ? trip.date|date('d-m-Y à H:i') : '' }}</p>

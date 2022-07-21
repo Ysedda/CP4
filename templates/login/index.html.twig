@@ -5,7 +5,7 @@
 {% block body %}
 <div class="home-banner d-flex justify-content-center align-items-center vh-100">
 
-<div class="container p-5 bg-light flex-column">
+<div class="container login-form p-5 bg-light flex-column">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
