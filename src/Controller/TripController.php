@@ -73,12 +73,14 @@ class TripController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_trip_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Trip $trip, TripRepository $tripRepository): Response
+    public function edit(Request $request, Trip $trip, TripRepository $tripRepository, Locator $locator): Response
     {
         $form = $this->createForm(TripType::class, $trip);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $locator->setCoordinates($trip);
+            $trip->setDriver($this->getUser());
             $tripRepository->add($trip, true);
 
             return $this->redirectToRoute('app_user_driver', [], Response::HTTP_SEE_OTHER);
