@@ -1,0 +1,16 @@
+{% extends "mail.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	- Annulation du trajet
+{% endblock %}
+
+{% block body %}
+	<h1 class="fs-4">Bonjour
+		{{ passenger.firstname }}</h1>
+	<h2 class="fs-5 my-3">{{ trip.driver.firstname ~ trip.driver.lastname }}
+		a annulé le trajet du
+		{{ trip.date|date('d-m-Y à H:i')}} :(</h2>
+	<p>Veuillez nous excuser pour la gêne occasionnée. </p>
+	<p class="m-3">Excellente journée à vous !</p>
+{% endblock %}

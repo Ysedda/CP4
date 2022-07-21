@@ -55,7 +55,13 @@
 													<a href="{{ path('app_trip_show', {('id'): trip.id }) }}" class="btn btn-dark {% if app.user is null %} w-100 {% endif %}">
 														<i class="fa-solid pe-2 fa-circle-info"></i>Détails</a>
 													{% if app.user %}
-														{% include 'trip/_cancel_trip.html.twig' %}
+														<form method="post" action="{{ path('app_driver_cancel', {'id': trip.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir décommander ce trajet ?');">
+        <div class="">
+            <button class="btn px-2 col-12 btn-danger">
+                <i class="fa-regular pe-2 fa-circle-check"></i>Annuler
+            </button>
+        </div>
+</form>
 													{% endif %}
 												</div>
 											</div>

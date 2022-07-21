@@ -76,7 +76,7 @@ class TripController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $tripRepository->add($trip, true);
 
-            return $this->redirectToRoute('app_trip_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_driver', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trip/edit.html.twig', [
@@ -144,14 +144,27 @@ class TripController extends AbstractController
     public function cancelDriving(
         Trip $trip,
         TripRepository $tripRepository,
+        MailerInterface $mailer
     ): Response {
+
+        foreach ($trip->getPassengers() as $passenger) {
+            $email = (new Email())
+            ->from($this->getParameter('mailer_from'))
+            ->to($passenger->getEmail())
+            ->subject('Annulation d\'un trajet')
+            ->html($this->renderView('trip_mail/cancel_driver_trip.html.twig', [
+                'trip' => $trip, 
+                'passenger' => $passenger
+            ]));
+            $mailer->send($email);
+        }
 
         $trip->setDriver(null);
         $tripRepository->add($trip, true);
 
         $this->addFlash('warning', 'Vous avez bien décommandé ce trajet !');
 
-        return $this->redirectToRoute('app_my_trips', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_user_driver', [], Response::HTTP_SEE_OTHER);
     }
 
 }
