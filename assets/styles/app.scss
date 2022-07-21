@@ -48,10 +48,11 @@ h1, h2, h3, h4, h5
     height:20rem;
 }
 
-.container {
+.login-form {
+    height:20rem;
     opacity: 0.97;
 }
 
-.login-form {
-    height:30rem;
+.container, .registration-form {
+    opacity: 0.97;
 }

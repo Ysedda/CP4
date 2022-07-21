@@ -1,26 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | Connexion {% endblock %}
+{% block title %}
+	{{ parent() }}
+	| Connexion
+{% endblock %}
 
 {% block body %}
-<div class="home-banner d-flex justify-content-center align-items-center vh-100">
-
-<div class="container login-form p-5 bg-light flex-column">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
-
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="_password"/>
-
-        {# If you want to control the URL the user is redirected to on success #}
-        <input type="hidden" name="_target_path" value="/trip"/>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button type="submit">Se connecter</button>
-    </form>
-    </div>
-    </div>
+	<div class="home-banner d-flex justify-content-center align-items-center vh-100">
+			<div class="row w-100">
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
+				<form class="mx-auto col-11 col-xl-2 col-md-4 login-form p-4 bg-light rounded-3 shadow d-flex flex-column align-items-center justify-content-between" action="{{ path('app_login') }}" method="post">
+					<div class="d-flex flex-column">
+						<label class="pb-2" for="justify-self-start username">Email:</label>
+						<input type="text" id="username" name="_username" value="{{ last_username }}"/>
+					</div>
+					<div class="d-flex flex-column">
+						<label class="pb-2" for="password">Mot de passe:</label>
+						<input type="password" id="password" name="_password"/>
+					</div>
+					{# If you want to control the URL the user is redirected to on success #}
+					<input type="hidden" name="_target_path" value="/trip"/>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<button class=" btn btn-primary" type="submit">Se connecter</button>
+				</form>
+			</div>
+	</div>
 {% endblock %}
