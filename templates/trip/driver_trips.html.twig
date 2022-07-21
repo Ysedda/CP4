@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	| Je conduis
+{% endblock %}
+
+{% block body %}
+	<div class="home-banner min-vh-100">
+		<div class="mb-0 d-flex justify-content-center">
+
+			<div class="container mb-0">
+				{% for category, messages in app.flashes %}
+					{% for message in messages %}
+						<div class="text-center w-100 alert alert-{{ category }}">
+							{{ message }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+				<h1 class="text-center mt-4">Je conduis</h1>
+
+				{# <a class="btn btn-lg btn-primary my-3" href="{{ path('app_trip_new') }}">Créer un trajet</a> #}
+				{% if trips is not empty %}
+					<div class="mt-4 w-100 d-flex justify-content-center flex-wrap">
+						{% for trip in trips %}
+							{% if app.user == trip.driver %}
+								<div class="card col-12 col-lg-8 m-2">
+									<div class="row g-0 flex-grow-1">
+										<div
+											class="col-md-6 d-none d-md-block">
+											{# <img src="..." class="img-fluid rounded-start" alt="..."> #}
+											{% set zoom = 0.08 %}
+											<iframe width="100%" height="100%" src="https://www.openstreetmap.org/export/embed.html?bbox={{ trip.startLongitude + zoom }}%2C{{ trip.startLatitude + zoom }}%2C{{ trip.startLongitude - zoom }}%2C{{ trip.startLatitude - zoom }}&amp;layer=mapnik&amp;marker={{ trip.startLatitude }}%2C{{ trip.startLongitude }}"></iframe>
+										</div>
+										<div class="col-md-6">
+											<div class="card-body py-0 d-flex flex-column justify-content-around gap-1 h-100">
+												<h2 class="card-title h5">
+													<i class="fa-solid fa-location-dot pe-2"></i>
+													{{ trip.meetingPoint }}</h2>
+												<p class="card-text">
+													<i class="fa-solid fa-calendar-day pe-2"></i>
+													{{ trip.date ? trip.date|date('d-m-Y à H:i') : '' }}</p>
+												{% if trip.spots > 1 %}
+													<span>
+														<i class="fa-solid fa-couch pe-2"></i>
+														{{ trip.spots }}
+														places</span>
+												{% else %}
+													<span>
+														<i class="fa-solid fa-couch pe-2"></i>
+														{{ trip.spots }}
+														place</span>
+												{% endif %}
+												<div class="d-flex col-12 justify-content-between gap-2">
+													<a href="{{ path('app_trip_show', {('id'): trip.id }) }}" class="btn btn-dark {% if app.user is null %} w-100 {% endif %}">
+														<i class="fa-solid pe-2 fa-circle-info"></i>Détails</a>
+													{% if app.user %}
+														{% include 'trip/_cancel_trip.html.twig' %}
+													{% endif %}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% else %}
+					<h2 class="text-center h4">Pas de trajets !</h2>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

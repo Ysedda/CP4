@@ -3,9 +3,16 @@
 {% block title %}{{ parent() }} | Éditer - {{ trip.meetingPoint }}{% endblock %}
 
 {% block body %}
+<section class="home-banner min-vh-100">
+<div class="row w-100">
+<div class="d-flex align-items-center mx-auto col-md-8 col-12 justify-content-center container">
+<div class="bg-light col-lg-6 col-11 rounded-3 shadow p-4 mt-5">
     <h1>Éditer {{ trip.meetingPoint }}</h1>
 
-    {{ include('trip/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('trip/_form.html.twig', {'button_label': 'Éditer'}) }}
 
-    {{ include('trip/_delete_form.html.twig') }}
+    </div>
+    </div>
+    </div>    
+    </section>
 {% endblock %}

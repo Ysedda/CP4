@@ -30,6 +30,14 @@ class TripController extends AbstractController
         ]);
     }
 
+    #[Route('/je-conduis', name: 'app_user_driver')]
+    public function userDriver(TripRepository $tripRepository): Response
+    {
+        return $this->render('trip/driver_trips.html.twig', [
+            'trips' => $tripRepository->findBy(['driver' => $this->getUser()]),
+        ]);
+    }
+
     #[Route('/new', name: 'app_trip_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TripRepository $tripRepository): Response
     {
@@ -119,5 +127,18 @@ class TripController extends AbstractController
         return $this->redirectToRoute('app_my_trips', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/drive/{id}/annuler', name: 'app_driver_cancel', methods: ['POST'])]
+    public function cancelDriving(
+        Trip $trip,
+        TripRepository $tripRepository,
+    ): Response {
+
+        $trip->setDriver(null);
+        $tripRepository->add($trip, true);
+
+        $this->addFlash('warning', 'Vous avez bien décommandé ce trajet !');
+
+        return $this->redirectToRoute('app_my_trips', [], Response::HTTP_SEE_OTHER);
+    }
 
 }
