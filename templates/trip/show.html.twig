@@ -1,38 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trip{% endblock %}
+{% block title %}
+	{{ parent() }}
+	| Trajet -
+	{{ trip.meetingPoint }}
+{% endblock %}
 
 {% block body %}
-    <h1>Trip</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ trip.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ trip.date ? trip.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>StartLatitude</th>
-                <td>{{ trip.startLatitude }}</td>
-            </tr>
-            <tr>
-                <th>StartLongitude</th>
-                <td>{{ trip.startLongitude }}</td>
-            </tr>
-            <tr>
-                <th>Spots</th>
-                <td>{{ trip.spots }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_trip_index') }}">back to list</a>
-
-    <a href="{{ path('app_trip_edit', {'id': trip.id}) }}">edit</a>
-
-    {{ include('trip/_delete_form.html.twig') }}
+	<section class="home-banner min-vh-100">
+		<div class="container">
+			<div class="row">
+				<div class="d-flex align-items-center col-md-8 col-12 justify-content-center container">
+					<div class="bg-light col-lg-6 col-11 rounded-3 shadow p-4 mt-5">
+						<div class="d-flex w-100 justify-content-between">
+							<a class="btn btn-dark" href="{{ path('app_trip_index') }}">
+								<i class="fa-regular fa-circle-left"></i>
+								Retour</a>
+							{% include 'trip/_accept_trip.html.twig' %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{{ include('trip/_delete_form.html.twig') }}
 {% endblock %}

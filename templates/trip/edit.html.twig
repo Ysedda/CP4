@@ -1,13 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Trip{% endblock %}
+{% block title %}{{ parent() }} | Éditer - {{ trip.meetingPoint }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Trip</h1>
+    <h1>Éditer {{ trip.meetingPoint }}</h1>
 
     {{ include('trip/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_trip_index') }}">back to list</a>
 
     {{ include('trip/_delete_form.html.twig') }}
 {% endblock %}

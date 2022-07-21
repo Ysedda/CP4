@@ -11,6 +11,9 @@
         </li>
         
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{{ path('app_my_trips') }}">Mes trajets</a>
+        </li>
                 <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{{ path('app_trip_new') }}">Créer un trajet</a>
         </li>

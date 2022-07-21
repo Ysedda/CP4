@@ -23,7 +23,7 @@
 				{% if trips is not empty %}
 					<div class="mt-4 w-100 d-flex justify-content-center flex-wrap">
 						{% for trip in trips %}
-							{% if app.user != trip.driver and trip.spots > 0 and app.user not in trip.passengers %}
+							{% if app.user != trip.driver and trip.driver != null and trip.spots > 0 and app.user not in trip.passengers %}
 								<div class="card col-12 col-lg-8 m-2">
 									<div class="row g-0 flex-grow-1">
 										<div class="col-md-6 d-none d-md-block">

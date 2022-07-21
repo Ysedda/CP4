@@ -1,4 +1,11 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    <div class="d-flex w-100 justify-content-between">
+    <a class="btn btn-dark" href="{{ path('app_trip_index') }}">
+    <i class="fa-regular fa-circle-left"></i>
+    Retour</a>
+    <button class="btn btn-success">
+    <i class="fa-solid fa-circle-plus"></i>
+    {{ button_label|default('Enregistrer') }}</button>
+    </div>
 {{ form_end(form) }}
