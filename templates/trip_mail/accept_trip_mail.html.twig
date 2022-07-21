@@ -1,0 +1,23 @@
+{% extends "mail.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	- Un nouveau passager
+{% endblock %}
+
+{% block body %}
+	<h1 class="fs-4">Bonjour
+		{{trip.driver.firstname}}</h1>
+	<h2 class="fs-5 my-3">{{ user.firstname ~ user.lastname }}
+		a accepté votre trajet du
+		{{ trip.date|date('d-m-Y à H:i')}}</h2>
+	<p class="m-3">Lieu de RDV:
+		{{ trip.meetingPoint }}</p>
+	<p class="m-3">Pour contacter
+		{{ user.firstname }}
+		:
+		<br><br>
+		{{ user.phone }}
+		<br>{{ user.email }}</p>
+	<p class="m-3">Excellente journée à vous !</p>
+{% endblock %}

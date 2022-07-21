@@ -6,9 +6,11 @@ use App\Entity\Trip;
 use App\Entity\User;
 use App\Form\TripType;
 use App\Repository\TripRepository;
+use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/trip')]
@@ -97,6 +99,7 @@ class TripController extends AbstractController
     public function acceptReservation(
         Trip $trip,
         TripRepository $tripRepository,
+        MailerInterface $mailer
     ): Response {
         /** @var User */
         $user = $this->getUser();
@@ -104,6 +107,16 @@ class TripController extends AbstractController
         $trip->addPassenger($user);
         $trip->setSpots($trip->getSpots() - 1);
         $tripRepository->add($trip, true);
+
+        $email = (new Email())
+        ->from($this->getParameter('mailer_from'))
+        ->to($trip->getDriver()->getEmail())
+        ->subject('Vous avez un nouveau passager !')
+        ->html($this->renderView('trip_mail/accept_trip_mail.html.twig', [
+            'trip' => $trip, 
+            'user' => $user
+        ]));
+        $mailer->send($email);
 
         $this->addFlash('success', 'Bienvenue à bord !');
 

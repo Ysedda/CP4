@@ -34,6 +34,7 @@ class UserFixtures extends Fixture
                 'user'
             );
             $user->setPassword($hashedPassword);
+            $user->setPhone($faker->phoneNumber());
             $this->addReference('user' . $i, $user);
             $manager->persist($user);
         }
